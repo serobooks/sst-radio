@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shinseungtae-archive.vercel.app/sitemap.xml
+Sitemap: https://sst-radio.vercel.app/sitemap.xml
