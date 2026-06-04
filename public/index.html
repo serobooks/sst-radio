@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘따라 신승태입니다 스크립트 아카이브</title>
+    
+    <!-- Meta Descriptions for SEO -->
+    <meta name="description" content="2년간 진행된 BTN 라디오 방송 '오늘따라 신승태'의 117화 분량 구어체 스크립트를 검색하여, 가수가 발언한 정확한 타임라인 유튜브 영상 시점으로 바로 이동하는 공식 팬 아카이브 웹사이트입니다.">
+    <meta name="keywords" content="신승태, 오늘따라 신승태, 트로트 야생마, 국악, BTN 라디오, 울림, 태사랑, 명대사, 타임라인, 아카이브">
+    <link rel="canonical" href="https://shinseungtae-archive.vercel.app/">
+
+    <!-- Open Graph / Facebook SEO -->
+    <meta property="og:title" content="오늘따라 신승태입니다 스크립트 아카이브">
+    <meta property="og:description" content="BTN라디오 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shinseungtae-archive.vercel.app/">
+    <meta property="og:image" content="https://shinseungtae-archive.vercel.app/og_image.png">
+    
+    <!-- Twitter Card SEO -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="오늘따라 신승태입니다 스크립트 아카이브">
+    <meta name="twitter:description" content="BTN라디오 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.">
+    <meta name="twitter:image" content="https://shinseungtae-archive.vercel.app/og_image.png">
+    
+    <!-- JSON-LD Structured Data for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "오늘따라 신승태입니다 스크립트 아카이브",
+      "alternateName": "오따신 아카이브",
+      "url": "https://shinseungtae-archive.vercel.app/",
+      "description": "BTN 라디오 방송 '오늘따라 신승태'의 117화 분량 구어체 스크립트를 검색하여, 가수가 발언한 정확한 타임라인 유튜브 영상 시점으로 바로 이동하는 아카이브입니다.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://shinseungtae-archive.vercel.app/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css?v=1.0.7">
+    
+    <!-- Favicon (Emoji 📻) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📻</text></svg>">
+</head>
+<body class="light-theme">
+    <!-- background radial aura effect mesh -->
+    <div class="mesh-gradient-bg" aria-hidden="true">
+        <div class="aura aura-1"></div>
+        <div class="aura aura-2"></div>
+    </div>
+
+    <header class="app-header">
+        <div class="container header-content">
+            <a href="/" class="logo-area" style="text-decoration: none;">
+                <span class="logo-icon" aria-hidden="true">📻</span>
+                <span class="logo-text">오따신 아카이브</span>
+            </a>
+            <nav class="header-nav">
+                <a href="#search-section" class="nav-link">검색</a>
+                <a href="#advice-section" class="nav-link">마도사의 조언</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <!-- Hero and Main Title -->
+        <section class="hero-section text-center">
+            <div class="container">
+                <div class="badge-accent">FAN-MADE MEMORY ARCHIVE</div>
+                <h1 id="main-title">오늘따라 신승태입니다<br><span class="highlight-text">스크립트 아카이브</span></h1>
+                <p class="hero-desc">
+                    BTN라디오에서 목요일 저녁 7시부터 9시까지 방송되는 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 궁금한 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.
+                </p>
+                <p class="hero-disclaimer">💡 본 아카이브는 AI 음성 인식 자막을 기반으로 하여 오타가 다수 포함되어 있을 수 있습니다.</p>
+            </div>
+        </section>
+
+        <!-- Search Engine Section -->
+        <section id="search-section" class="search-section">
+            <div class="container">
+                <div class="glass-card search-box-wrapper">
+                    <!-- Search Input & Button Form -->
+                    <div class="search-form-group">
+                        <label for="search-input" class="sr-only">라디오 대사 검색어 입력</label>
+                        <div class="input-relative">
+                            <span class="search-icon-inside" aria-hidden="true">🔍</span>
+                            <input type="text" id="search-input" placeholder="다시 듣고 싶은 이야기의 키워드를 입력해 보세요(예: 녹음, 경기민요, 선글라스)" autocomplete="off">
+                        </div>
+                        <button type="button" id="search-btn">찾기</button>
+                    </div>
+
+                    <!-- Recommended Hash Tags -->
+                    <div class="recommend-tags-wrapper">
+                        <span class="tags-label">이런 주제는 어때요?</span>
+                        <div id="recommend-tags" class="tags-list">
+                            <button type="button" class="tag-btn" data-tag="현역가왕">#현역가왕_뒷이야기</button>
+                            <button type="button" class="tag-btn" data-tag="타악기, 장구, 꽹과리, 젬베">#타악기_연주자</button>
+                            <button type="button" class="tag-btn" data-tag="창부타령, 경기민요">#태디의_민요교실</button>
+                            <button type="button" class="tag-btn" data-tag="ENFP">#ENFP</button>
+                            <button type="button" class="tag-btn" data-tag="씽씽밴드, 씽씽">#씽씽밴드의_추억</button>
+                            <button type="button" class="tag-btn" data-tag="static:1-4047-스카이라운지,7-2031-로라,14-775-농악 대회,125-512-고무신">#학창시절</button>
+                            <button type="button" class="tag-btn" data-tag="static:21-5246-프랑스,31-455-사탄,40-1399-아비뇽,52-2550-베를린,55-454-몽골,86-1184-슬립노모어,89-2750-대사관,98-3796-프랑스">#해외_공연_에피소드</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Results Counter & Status -->
+                <div class="results-meta-bar" style="display: none;">
+                    <p class="meta-text"><span id="results-count" class="count-highlight">0</span>개의 순간을 찾았습니다.</p>
+                </div>
+
+                <!-- Search Results Grid -->
+                <div id="results-container" class="results-grid">
+                    <!-- Dynamic search result cards will be rendered here -->
+                    <div class="initial-placeholder-msg text-center">
+                        <p class="placeholder-emoji">🐎</p>
+                        <p class="placeholder-text">가장 좋아하는 키워드나 태그를 눌러 탐색을 시작해보세요!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Section: Shaman's Advice (오늘 하루 마도사의 조언) -->
+        <section id="advice-section" class="advice-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="badge-magic">SPECIAL CORNER</div>
+                    <h2>🔮 오늘 하루 마도사의 조언</h2>
+                    <p class="section-desc">
+                        오따신의 명물 '야생마도사'의 조언을 담은 포춘쿠키입니다. 포춘쿠키를 터치해 마도사의 따뜻한 조언과 추천 영상을 만나보세요.
+                    </p>
+                </div>
+
+                <div class="advice-cookie-wrapper">
+                    <!-- Fortune Cookie Interactive Area -->
+                    <div id="cookie-wrapper" class="cookie-wrapper">
+                        <img src="fortune_cookie_closed.png" id="fortune-cookie-img" alt="마도사의 신비로운 포춘쿠키" class="fortune-cookie-graphic">
+                    </div>
+
+                    <!-- Shaman's Paper Slip (조언 쪽지) -->
+                    <div id="advice-paper" class="advice-paper-slip" style="display: none;">
+                        <div class="paper-decor-line"></div>
+                        <div class="paper-content-area">
+                            <div class="paper-header">
+                                <span class="paper-ep-tag" id="advice-ep">오늘따라 신승태 125회</span>
+                                <span class="paper-star">✨</span>
+                            </div>
+                            <p class="paper-main-text" id="advice-text">
+                                "뇌회전 안 될 때는요, 돌리려고 하지 마세요. 머리를 쉬세요. 안 될 때는 능률이 안 오르기 때문에 안 하는 게 낫습니다."
+                            </p>
+                            <div class="paper-action-area">
+                                <a href="#" id="advice-youtube-link" class="paper-btn-link" target="_blank" rel="noopener noreferrer">
+                                    🎬 추천 영상 바로 가기
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Action Button (Re-pop cookie) -->
+                    <div class="magic-action-area text-center" id="action-area" style="display: none;">
+                        <button type="button" id="advice-btn" class="magic-btn">🪄 조언 다시 뽑기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container footer-content text-center">
+            <p class="footer-copy">&copy; 2026 오늘따라 신승태입니다 스크립트 아카이브. All Rights Reserved.</p>
+            <p class="footer-disclaimer">본 사이트는 BTN라디오 '오늘따라 신승태입니다'를 애청하는 개인 팬이 제작한 비상업적 팬 전용 유틸리티 공간입니다. 모든 영상 및 스크립트 콘텐츠의 저작권은 BTN라디오 및 아티스트에게 있으며, 본 사이트는 광고 수익을 창출하지 않습니다.</p>
+            <p class="footer-disclaimer">웹사이트 관련 오류 및 모든 문의 사항은 공식 방송국이 아닌 <a href="https://www.youtube.com/@%ED%95%9C%EC%9E%85%EC%98%A5%EC%88%98%EC%88%98_corn_bites" class="footer-link" target="_blank" rel="noopener noreferrer">제작자(유튜브 한입옥수수 채널)</a>에게 보내주시기 바랍니다.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="main.js"></script>
+</body>
+</html>

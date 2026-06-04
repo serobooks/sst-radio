@@ -1,0 +1,16 @@
+# Pyrefly Static Analysis Configuration
+# 이 설정은 Pyrefly 린터가 실제 프로젝트 소스 디렉터리만 정적 분석하도록 제한하고,
+# 인메모리 가상 캐시 디렉터리(__pyrefly_virtual__) 분석으로 인한 가짜 양성(False Positive) 파스 에러를 방지합니다.
+
+project-includes = [
+    "api",
+    "tests",
+    "make_db.py"
+]
+
+project-excludes = [
+    "**/.[!/.]*",
+    "**/__pycache__",
+    "**/__pyrefly_virtual__/**",
+    "d:/__pyrefly_virtual__/**"
+]
