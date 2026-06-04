@@ -182,8 +182,10 @@ async def get_random_advice():
     }
 
 # 로컬 단독 구동 시 정적 파일(HTML/CSS/JS)을 함께 서빙하기 위한 정적 파일 마운트
+# Vercel 환경이 아니거나, 실제 static_dir이 존재하는 경우에만 마운트합니다.
 from fastapi.staticfiles import StaticFiles
 
 static_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
-app.mount("/", StaticFiles(directory=static_dir, html=True), name="public")
+if not os.environ.get("VERCEL") and os.path.exists(static_dir) and os.path.isdir(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="public")
 

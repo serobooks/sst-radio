@@ -533,6 +533,36 @@ def test_seo_elements_exist():
     assert os.path.exists(sitemap_path), "public/sitemap.xml 파일이 존재하지 않습니다."
 
 
+def test_app_load_without_static_dir(monkeypatch):
+    """static_dir이 존재하지 않는 환경(예: Vercel 서버리스 환경)에서 api.index 모듈 로드가 RuntimeError 없이 성공하는지 검증한다."""
+    import importlib
+    import sys
+    import os
+    
+    # os.path.exists와 os.path.isdir이 public 디렉토리에 대해 False를 반환하도록 모킹
+    original_exists = os.path.exists
+    original_isdir = os.path.isdir
+    
+    def mock_exists(path):
+        if "public" in str(path):
+            return False
+        return original_exists(path)
+        
+    def mock_isdir(path):
+        if "public" in str(path):
+            return False
+        return original_isdir(path)
+        
+    monkeypatch.setattr(os.path, "exists", mock_exists)
+    monkeypatch.setattr(os.path, "isdir", mock_isdir)
+    
+    # 모듈 리로드 시도
+    # 수정 전 코드에서는 os.path.exists 검사 없이 무조건 StaticFiles를 마운트하므로
+    # 존재하지 않는 디렉토리에 대해 RuntimeError: Directory '...' does not exist 가 발생해야 합니다.
+    importlib.reload(sys.modules["api.index"])
+
+
+
 
 
 
