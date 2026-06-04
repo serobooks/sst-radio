@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             
             // 데이터 업데이트
-            adviceEp.textContent = `오늘따라 신승태 ${data.episode}회`;
+            adviceEp.textContent = `오늘따라 신승태입니다 ${data.episode}회`;
             adviceText.textContent = `"${data.text}"`;
             
             const isPlaceholderId = data.video_id.startsWith('YOUTUBE_ID');

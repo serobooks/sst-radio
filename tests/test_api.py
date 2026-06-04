@@ -621,6 +621,19 @@ def test_style_css_quote_bubble_no_border():
     assert "padding-left: 0" in css_content or "padding-left:0" in css_content, ".quote-bubble의 padding-left가 0으로 정렬이 맞춰져야 합니다."
 
 
+def test_main_js_fortune_cookie_title():
+    """main.js에서 포춘쿠키 개봉 후 표시되는 회차 텍스트 포맷이 '오늘따라 신승태입니다 nn회' 형식을 취하고 있는지 검증한다."""
+    public_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
+    js_path = os.path.join(public_dir, "main.js")
+    assert os.path.exists(js_path)
+    
+    with open(js_path, "r", encoding="utf-8") as f:
+        js_content = f.read()
+        
+    assert "오늘따라 신승태입니다 ${data.episode}회" in js_content or "오늘따라 신승태입니다 ` + data.episode" in js_content, "포춘쿠키 결과 창의 회차 문구가 '오늘따라 신승태입니다 ${data.episode}회'로 수정되어야 합니다."
+
+
+
 
 
 
