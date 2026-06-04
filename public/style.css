@@ -515,16 +515,21 @@ h1 {
 .episode-time-tag {
     font-size: 0.75rem;
     font-weight: 700;
-    color: white;
-    background-color: var(--color-primary);
-    padding: 2px 8px;
-    border-radius: 40px;
+    color: var(--color-primary);
+    background-color: rgba(0, 180, 255, 0.08);
+    border: 1px solid rgba(0, 180, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
 }
 
 .quote-bubble {
     position: relative;
-    padding-left: 12px;
-    border-left: 3px solid var(--glass-border);
+    padding-left: 0;
+    border-left: none;
     margin-bottom: 12px;
 }
 

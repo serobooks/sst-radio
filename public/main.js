@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="card-info-area">
                     <div class="card-meta">
-                        <span class="episode-title">${item.title}</span>
+                        <span class="episode-title">${item.title.replace(/오늘따라\s+신승태\s*/g, '')}</span>
                         <span class="episode-time-tag">⏱️ ${timeStr}</span>
                         <span class="episode-date">${item.date}</span>
                     </div>
@@ -307,6 +307,17 @@ document.addEventListener('DOMContentLoaded', () => {
             cookieWrapper.classList.remove('is-cracked');
         }, 300);
     });
+
+    // 7-2. 모바일 반응형 placeholder 업데이트 로직
+    const updatePlaceholder = () => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            searchInput.placeholder = '키워드를 입력해 주세요';
+        } else {
+            searchInput.placeholder = '다시 듣고 싶은 이야기의 키워드를 입력해 보세요(예: 녹음, 경기민요, 선글라스)';
+        }
+    };
+    updatePlaceholder();
+    window.addEventListener('resize', updatePlaceholder);
 
     // 8. 페이지 초기화 로드
     // 최초 구동 시 1회 무작위 조언 가져와서 캐싱해둠

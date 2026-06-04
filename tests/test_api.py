@@ -569,6 +569,61 @@ def test_root_redirects_to_index_html():
     assert response.headers.get("location") == "/index.html"
 
 
+def test_main_js_removes_title_prefix():
+    """main.js에서 검색 결과 타이틀 중 '오늘따라 신승태' 부분을 제거하는 처리가 구현되어 있는지 검증한다."""
+    public_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
+    js_path = os.path.join(public_dir, "main.js")
+    assert os.path.exists(js_path)
+    
+    with open(js_path, "r", encoding="utf-8") as f:
+        js_content = f.read()
+        
+    assert "replace(/오늘따라\\s+신승태\\s*/" in js_content or "replace(\"오늘따라 신승태" in js_content, "main.js에 '오늘따라 신승태' 타이틀 접두사를 제거하는 로직이 정의되어야 합니다."
+
+
+def test_style_css_time_tag_style():
+    """style.css에 .episode-time-tag 클래스의 스타일로 nowrap, inline-flex, 둥근 테두리, 연한 하늘색 배경이 설정되어 있는지 검증한다."""
+    public_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
+    css_path = os.path.join(public_dir, "style.css")
+    assert os.path.exists(css_path)
+    
+    with open(css_path, "r", encoding="utf-8") as f:
+        css_content = f.read()
+        
+    assert "white-space: nowrap" in css_content, ".episode-time-tag에 white-space: nowrap 속성이 적용되어야 합니다."
+    assert "display: inline-flex" in css_content or "display:inline-flex" in css_content, ".episode-time-tag에 display: inline-flex 속성이 적용되어야 합니다."
+    assert "rgba(0, 180, 255, 0.08)" in css_content, ".episode-time-tag에 파스텔 하늘색 배경(rgba(0, 180, 255, 0.08))이 정의되어야 합니다."
+
+
+def test_main_js_mobile_placeholder():
+    """main.js에서 모바일 뷰 시 placeholder 텍스트를 '키워드를 입력해 주세요'로 변경하는 로직이 있는지 검증한다."""
+    public_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
+    js_path = os.path.join(public_dir, "main.js")
+    assert os.path.exists(js_path)
+    
+    with open(js_path, "r", encoding="utf-8") as f:
+        js_content = f.read()
+        
+    assert "키워드를 입력해 주세요" in js_content, "main.js에 모바일용 placeholder 텍스트('키워드를 입력해 주세요')가 정의되어 있어야 합니다."
+    assert "matchMedia" in js_content or "resize" in js_content, "main.js에 화면 크기 변화 혹은 모바일 뷰 감지 로직이 정의되어야 합니다."
+
+
+def test_style_css_quote_bubble_no_border():
+    """style.css에서 .quote-bubble 클래스의 border-left가 제거되거나 none으로 설정되어 있고, padding-left가 0 혹은 0px로 설정되어 정렬이 일치하는지 검증한다."""
+    public_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
+    css_path = os.path.join(public_dir, "style.css")
+    assert os.path.exists(css_path)
+    
+    with open(css_path, "r", encoding="utf-8") as f:
+        css_content = f.read()
+        
+    assert "border-left: 3px solid var(--glass-border)" not in css_content, ".quote-bubble에 왼쪽 세로줄 스타일이 여전히 존재합니다."
+    assert "padding-left: 0" in css_content or "padding-left:0" in css_content, ".quote-bubble의 padding-left가 0으로 정렬이 맞춰져야 합니다."
+
+
+
+
+
 
 
 
