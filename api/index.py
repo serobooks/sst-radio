@@ -24,6 +24,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from fastapi.responses import RedirectResponse
+
+@app.get("/")
+async def redirect_to_index():
+    """루트 경로 접속 시 /index.html 정적 파일로 리다이렉트합니다."""
+    return RedirectResponse(url="/index.html")
+
 def format_clean_title(title_str: str, episode_num: int) -> str:
     """사용자에게 보여줄 정돈된 타이틀로 포맷합니다."""
     # 예: '오늘따라 신승태 001.txt' -> '오늘따라 신승태 1회'

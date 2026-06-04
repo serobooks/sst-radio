@@ -562,6 +562,13 @@ def test_app_load_without_static_dir(monkeypatch):
     importlib.reload(sys.modules["api.index"])
 
 
+def test_root_redirects_to_index_html():
+    """루트 경로('/')로 접속 시 '/index.html'로 리다이렉트해야 한다."""
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code in (301, 302, 303, 307, 308)
+    assert response.headers.get("location") == "/index.html"
+
+
 
 
 
