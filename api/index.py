@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
-from fastapi import FastAPI, HTTPException, Query
-from fastapi.middleware.cors import CORSMiddleware
+import os
 import random
 import re
+import sys
+
+from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 # 기존 data.py 및 추출된 데이터, 매핑 딕셔너리 임포트
-import sys
-import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from data import RADIO_DATA
-from api.advice_data import ADVICE_DATA
-from api.youtube_mapping import YOUTUBE_MAP
+from data import RADIO_DATA  # noqa: E402
+from api.advice_data import ADVICE_DATA  # noqa: E402
+from api.youtube_mapping import YOUTUBE_MAP  # noqa: E402
 
 app = FastAPI(title="오늘따라 신승태 라디오 아카이브 API")
 
@@ -24,7 +27,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from fastapi.responses import RedirectResponse
 
 @app.get("/")
 async def redirect_to_index():
@@ -190,8 +192,6 @@ async def get_random_advice():
 
 # 로컬 단독 구동 시 정적 파일(HTML/CSS/JS)을 함께 서빙하기 위한 정적 파일 마운트
 # Vercel 환경이 아니거나, 실제 static_dir이 존재하는 경우에만 마운트합니다.
-from fastapi.staticfiles import StaticFiles
-
 static_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
 if not os.environ.get("VERCEL") and os.path.exists(static_dir) and os.path.isdir(static_dir):
     app.mount("/", StaticFiles(directory=static_dir, html=True), name="public")
