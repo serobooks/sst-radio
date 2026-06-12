@@ -312,7 +312,7 @@ def test_footer_contents_and_link():
     assert "광고 수익을 창출하지 않습니다." in html_content, "푸터 안내글이 정상적으로 개편되지 않았습니다."
     
     # 제작자 유튜브 하이퍼링크 존재 여부 및 주소 확인
-    assert "https://www.youtube.com/@%ED%95%9C%EC%9E%85%EC%98%A5%EC%88%98%EC%88%98_corn_bites" in html_content, "제작자 유튜브 주소가 index.html에 링크되지 않았습니다."
+    assert "https://youtu.be/IY0xnDU5NuY?si=ANhZGPFktCNjiRtb" in html_content, "제작자 유튜브 주소가 index.html에 링크되지 않았습니다."
     assert "제작자(유튜브 한입옥수수 채널)" in html_content, "제작자(유튜브 한입옥수수 채널) 링크 텍스트가 적용되지 않았습니다."
     assert "공식 방송국이 아닌" in html_content, "방송국 정보 예외구가 변경되지 않았습니다."
     
@@ -657,6 +657,19 @@ def test_advice_data_contains_episode_128():
     for item in ep128_data:
         video_id = YOUTUBE_MAP.get(128)
         assert video_id == "IlKipxW3Bgc", f"128회 유튜브 매핑 ID가 올바르지 않습니다. (실제 매핑된 ID: {video_id})"
+
+
+def test_vercel_analytics_script_exists():
+    """index.html에 Vercel Analytics 분석 스크립트가 포함되어 있어야 한다."""
+    public_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
+    html_path = os.path.join(public_dir, "index.html")
+    assert os.path.exists(html_path)
+    
+    with open(html_path, "r", encoding="utf-8") as f:
+        html_content = f.read()
+        
+    assert "/_vercel/insights/script.js" in html_content, "index.html에 Vercel Web Analytics 스크립트가 존재하지 않습니다."
+
 
 
 
