@@ -348,6 +348,12 @@ def test_episode_dates_are_accurate():
     assert ep2 is not None, "2회 에피소드 데이터가 존재하지 않습니다."
     assert ep2.get("date") == "2024-01-11", f"2회 날짜가 {ep2.get('date')}로 잘못 파싱되었습니다. (기대값: 2024-01-11)"
 
+    # 128회 에피소드 찾기
+    ep128 = next((ep for ep in RADIO_DATA if ep.get("episode") == 128), None)
+    assert ep128 is not None, "128회 에피소드 데이터가 존재하지 않습니다."
+    assert ep128.get("date") == "2026-06-11", f"128회 날짜가 {ep128.get('date')}로 잘못 파싱되었습니다. (기대값: 2026-06-11)"
+
+
 
 def test_advice_ids_are_sequential():
     """api/advice_data.py의 ADVICE_DATA의 모든 ID 번호가 1부터 누락 없이 순차적으로 연속되어야 한다."""
@@ -631,6 +637,27 @@ def test_main_js_fortune_cookie_title():
         js_content = f.read()
         
     assert "오늘따라 신승태입니다 ${data.episode}회" in js_content or "오늘따라 신승태입니다 ` + data.episode" in js_content, "포춘쿠키 결과 창의 회차 문구가 '오늘따라 신승태입니다 ${data.episode}회'로 수정되어야 합니다."
+
+
+def test_advice_data_contains_episode_128():
+    """128회 방송 조언 데이터(ID: 94, 95)가 누락 없이 올바르게 포함되어 있고 유튜브 매핑이 올바른지 확인한다."""
+    from api.advice_data import ADVICE_DATA
+    from api.youtube_mapping import YOUTUBE_MAP
+
+    ep128_data = [item for item in ADVICE_DATA if item["episode"] == 128]
+    assert len(ep128_data) == 2, f"128회 조언 데이터가 2개가 아닙니다. (실제 개수: {len(ep128_data)}개)"
+
+    # ID 검증 (94, 95)
+    expected_ids = {94, 95}
+    actual_ids = {item["id"] for item in ep128_data}
+    assert expected_ids == actual_ids, f"기대했던 ID {expected_ids}와 실제 ID {actual_ids}가 일치하지 않습니다."
+
+    # 유튜브 영상 ID 검증
+    # 128회 영상 ID는 youtube_mapping.py의 YOUTUBE_MAP에 정의된 실제 ID "IlKipxW3Bgc" 여야 함
+    for item in ep128_data:
+        video_id = YOUTUBE_MAP.get(128)
+        assert video_id == "IlKipxW3Bgc", f"128회 유튜브 매핑 ID가 올바르지 않습니다. (실제 매핑된 ID: {video_id})"
+
 
 
 

@@ -2,6 +2,7 @@
 import re
 import json
 import os
+import functools
 
 # target_words.json 로드
 target_words_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "target_words.json")
@@ -27,6 +28,7 @@ if os.path.exists(corrections_path):
 else:
     MANUAL_CORRECTIONS = {}
 
+@functools.lru_cache(maxsize=10240)
 def disassemble_korean(text):
     """한글 음절을 초성, 중성, 종성 자소로 분해합니다."""
     CHOSUNG = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
@@ -48,6 +50,7 @@ def disassemble_korean(text):
             result.append(char)
     return "".join(result)
 
+@functools.lru_cache(maxsize=10240)
 def levenshtein_distance(s1, s2):
     """두 자소 문자열 간의 Levenshtein 편집 거리를 계산합니다."""
     if len(s1) < len(s2):
@@ -68,6 +71,26 @@ def levenshtein_distance(s1, s2):
 
     return previous_row[-1]
 
+
+@functools.lru_cache(maxsize=10240)
+def _correct_single_word(word, target_words_tuple):
+    for target in target_words_tuple:
+        target_len = len(target)
+        if len(word) >= target_len:
+            prefix = word[:target_len]
+            suffix = word[target_len:]
+            
+            target_dis = disassemble_korean(target)
+            prefix_dis = disassemble_korean(prefix)
+            dist = levenshtein_distance(target_dis, prefix_dis)
+            
+            surnames = ('김', '이', '박', '최', '신', '임', '조', '강', '윤', '장', '한', '오', '서', '안', '황', '송', '전', '홍', '유')
+            is_short_name = target_len == 3 and target.startswith(surnames)
+            threshold = 1 if (target_len <= 2 or is_short_name) else 2
+            if dist <= threshold:
+                return target + suffix
+    return word
+
 def correct_spelling_fuzzy(text, target_words):
     """target_words의 기준 명칭과 유사한 텍스트 상의 오타를 자소 유사도 비교를 통해 자동으로 교정합니다."""
     if not text or not target_words:
@@ -75,31 +98,15 @@ def correct_spelling_fuzzy(text, target_words):
 
     # 원본 공백을 완벽히 보존하며 단어 단위로 쪼갬
     tokens = re.split(r'(\s+)', text)
+    target_words_tuple = tuple(target_words)
     
     for i in range(len(tokens)):
         # 공백이나 특수 문자가 아닌 일반 단어 부분만 교정 시도
         if i % 2 == 0 and tokens[i]:
-            word = tokens[i]
-            for target in target_words:
-                target_len = len(target)
-                if len(word) >= target_len:
-                    prefix = word[:target_len]
-                    suffix = word[target_len:]
-                    
-                    target_dis = disassemble_korean(target)
-                    prefix_dis = disassemble_korean(prefix)
-                    dist = levenshtein_distance(target_dis, prefix_dis)
-                    
-                    # 2글자 이하이거나 성씨로 시작하는 3글자 한국 인명은 1자소 차이만 허용 (청취자 이름 오염 예방)
-                    # 그 외 3글자 이상 일반 단어(예: 꽹과리)는 최대 2자소 차이까지 허용
-                    surnames = ('김', '이', '박', '최', '신', '임', '조', '강', '윤', '장', '한', '오', '서', '안', '황', '송', '전', '홍', '유')
-                    is_short_name = target_len == 3 and target.startswith(surnames)
-                    threshold = 1 if (target_len <= 2 or is_short_name) else 2
-                    if dist <= threshold:
-                        tokens[i] = target + suffix
-                        break
+            tokens[i] = _correct_single_word(tokens[i], target_words_tuple)
                         
     return "".join(tokens)
+
 
 # 1. 삭제 로그 파일 열기
 log_file = open("deleted_log.txt", "w", encoding="utf-8")
