@@ -11,7 +11,7 @@
 
 # 1단계: 가상의 기본 유튜브 ID 생성 (임시 개발용)
 YOUTUBE_MAP = {
-    i: f"YOUTUBE_ID_OF_EPISODE_{i:03d}" for i in range(1, 130)
+    i: f"YOUTUBE_ID_OF_EPISODE_{i:03d}" for i in range(1, 131)
 }
 
 # 2단계: 실제 유튜브 동영상 ID 목록을 기입하는 틀
@@ -136,7 +136,8 @@ YOUTUBE_MAP.update({
     126: "1KYKZRwFkIE",
     127: "p4Y01nkSlOM",
     128: "IlKipxW3Bgc",
-    129: "B17-7_RYiyg"
+    129: "B17-7_RYiyg",
+    130: "H0VsbrAP9HQ"
 })
 
 # 3단계: 빈 문자열("")로 남아있는 항목은 시스템 충돌 방지를 위해 기본 가상 임시 ID로 자동 롤백
