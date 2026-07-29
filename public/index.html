@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘따라 신승태입니다 스크립트 아카이브</title>
-    
+
     <!-- Meta Descriptions for SEO -->
-    <meta name="description" content="2년간 진행된 BTN 라디오 방송 '오늘따라 신승태'의 118화 분량 구어체 스크립트를 검색하여, 가수가 발언한 정확한 타임라인 유튜브 영상 시점으로 바로 이동하는 공식 팬 아카이브 웹사이트입니다.">
+    <meta name="description"
+        content="2년간 진행된 BTN 라디오 방송 '오늘따라 신승태'의 118화 분량 구어체 스크립트를 검색하여, 가수가 발언한 정확한 타임라인 유튜브 영상 시점으로 바로 이동하는 공식 팬 아카이브 웹사이트입니다.">
     <meta name="keywords" content="신승태, 오늘따라 신승태, 트로트 야생마, 국악, BTN 라디오, 울림, 태사랑, 명대사, 타임라인, 아카이브">
     <link rel="canonical" href="https://sst-radio.vercel.app/">
 
     <!-- Open Graph / Facebook SEO -->
     <meta property="og:title" content="오늘따라 신승태입니다 스크립트 아카이브">
-    <meta property="og:description" content="BTN라디오 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.">
+    <meta property="og:description"
+        content="BTN라디오 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sst-radio.vercel.app/">
     <meta property="og:image" content="https://sst-radio.vercel.app/og_image.png?v=1.0.1">
-    
+
     <!-- Twitter Card SEO -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="오늘따라 신승태입니다 스크립트 아카이브">
-    <meta name="twitter:description" content="BTN라디오 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.">
+    <meta name="twitter:description"
+        content="BTN라디오 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.">
     <meta name="twitter:image" content="https://sst-radio.vercel.app/og_image.png?v=1.0.1">
-    
+
     <!-- JSON-LD Structured Data for Google Search -->
     <script type="application/ld+json">
     {
@@ -43,17 +47,20 @@
     <!-- Google Fonts: Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="style.css?v=1.0.7">
-    
-    <!--🔮 이모지를 파비콘으로 설정할 경우 -->
-    <link rel="icon" href="https://fav.farm/🔮">
-    
+
+    <!--📻 이모지를 파비콘으로 설정할 경우 -->
+    <link rel="icon" href="https://fav.farm/📻">
+
     <!-- Vercel Web Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
+
 <body class="light-theme">
     <!-- background radial aura effect mesh -->
     <div class="mesh-gradient-bg" aria-hidden="true">
@@ -81,7 +88,8 @@
                 <div class="badge-accent">FAN-MADE MEMORY ARCHIVE</div>
                 <h1 id="main-title">오늘따라 신승태입니다<br><span class="highlight-text">스크립트 아카이브</span></h1>
                 <p class="hero-desc">
-                    BTN라디오에서 목요일 저녁 7시부터 9시까지 방송되는 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 궁금한 키워드를 검색해 라디오 속 소중한 순간들을 다시 만나보세요.
+                    BTN라디오에서 목요일 저녁 7시부터 9시까지 방송되는 '오늘따라 신승태입니다'의 스크립트를 정리한 웹사이트입니다. 궁금한 키워드를 검색해 라디오 속 소중한 순간들을 다시
+                    만나보세요.
                 </p>
                 <p class="hero-disclaimer">💡 본 아카이브는 AI 음성 인식 자막을 기반으로 하여 오타가 다수 포함되어 있을 수 있습니다.</p>
             </div>
@@ -96,7 +104,8 @@
                         <label for="search-input" class="sr-only">라디오 대사 검색어 입력</label>
                         <div class="input-relative">
                             <span class="search-icon-inside" aria-hidden="true">🔍</span>
-                            <input type="text" id="search-input" placeholder="다시 듣고 싶은 이야기의 키워드를 입력해 보세요(예: 녹음, 경기민요, 선글라스)" autocomplete="off">
+                            <input type="text" id="search-input"
+                                placeholder="다시 듣고 싶은 이야기의 키워드를 입력해 보세요(예: 녹음, 경기민요, 선글라스)" autocomplete="off">
                         </div>
                         <button type="button" id="search-btn">찾기</button>
                     </div>
@@ -108,10 +117,13 @@
                             <button type="button" class="tag-btn" data-tag="현역가왕">#현역가왕_뒷이야기</button>
                             <button type="button" class="tag-btn" data-tag="타악기, 장구, 꽹과리, 젬베">#타악기_연주자</button>
                             <button type="button" class="tag-btn" data-tag="창부타령, 경기민요">#태디의_민요교실</button>
-                            <button type="button" class="tag-btn" data-tag="static:3-966-ENFP,7-4505-ENFP,22-5706-ENFP,89-488-ENFP,130-6011-ENFP,133-2934-진짜 P">#ENFP</button>
+                            <button type="button" class="tag-btn"
+                                data-tag="static:3-966-ENFP,7-4505-ENFP,22-5706-ENFP,89-488-ENFP,130-6011-ENFP,133-2934-진짜 P">#ENFP</button>
                             <button type="button" class="tag-btn" data-tag="씽씽밴드, 씽씽">#씽씽밴드의_추억</button>
-                            <button type="button" class="tag-btn" data-tag="static:1-4047-스카이라운지,7-2031-로라,14-775-농악 대회,125-512-고무신">#학창시절</button>
-                            <button type="button" class="tag-btn" data-tag="static:21-5246-프랑스,31-455-사탄,40-1399-아비뇽,52-2550-베를린,55-454-몽골,86-1184-슬립노모어,89-2750-대사관,98-3796-프랑스">#해외_공연_에피소드</button>
+                            <button type="button" class="tag-btn"
+                                data-tag="static:1-4047-스카이라운지,7-2031-로라,14-775-농악 대회,125-512-고무신">#학창시절</button>
+                            <button type="button" class="tag-btn"
+                                data-tag="static:21-5246-프랑스,31-455-사탄,40-1399-아비뇽,52-2550-베를린,55-454-몽골,86-1184-슬립노모어,89-2750-대사관,98-3796-프랑스">#해외_공연_에피소드</button>
                         </div>
 
                     </div>
@@ -147,7 +159,8 @@
                 <div class="advice-cookie-wrapper">
                     <!-- Fortune Cookie Interactive Area -->
                     <div id="cookie-wrapper" class="cookie-wrapper">
-                        <img src="fortune_cookie_closed.png" id="fortune-cookie-img" alt="마도사의 신비로운 포춘쿠키" class="fortune-cookie-graphic">
+                        <img src="fortune_cookie_closed.png" id="fortune-cookie-img" alt="마도사의 신비로운 포춘쿠키"
+                            class="fortune-cookie-graphic">
                     </div>
 
                     <!-- Shaman's Paper Slip (조언 쪽지) -->
@@ -162,7 +175,8 @@
                                 "뇌회전 안 될 때는요, 돌리려고 하지 마세요. 머리를 쉬세요. 안 될 때는 능률이 안 오르기 때문에 안 하는 게 낫습니다."
                             </p>
                             <div class="paper-action-area">
-                                <a href="#" id="advice-youtube-link" class="paper-btn-link" target="_blank" rel="noopener noreferrer">
+                                <a href="#" id="advice-youtube-link" class="paper-btn-link" target="_blank"
+                                    rel="noopener noreferrer">
                                     🎬 추천 영상 바로 가기
                                 </a>
                             </div>
@@ -181,12 +195,16 @@
     <footer class="app-footer">
         <div class="container footer-content text-center">
             <p class="footer-copy">&copy; 2026 오늘따라 신승태입니다 스크립트 아카이브. All Rights Reserved.</p>
-            <p class="footer-disclaimer">본 사이트는 BTN라디오 '오늘따라 신승태입니다'를 애청하는 개인 팬이 제작한 비상업적 팬 전용 유틸리티 공간입니다. 모든 영상 및 스크립트 콘텐츠의 저작권은 BTN라디오 및 아티스트에게 있으며, 본 사이트는 광고 수익을 창출하지 않습니다.</p>
-            <p class="footer-disclaimer">웹사이트 관련 오류 및 모든 문의 사항은 공식 방송국이 아닌 <a href="https://youtu.be/IY0xnDU5NuY?si=ANhZGPFktCNjiRtb" class="footer-link" target="_blank" rel="noopener noreferrer">제작자(유튜브 한입옥수수 채널)</a>에게 보내주시기 바랍니다.</p>
+            <p class="footer-disclaimer">본 사이트는 BTN라디오 '오늘따라 신승태입니다'를 애청하는 개인 팬이 제작한 비상업적 팬 전용 유틸리티 공간입니다. 모든 영상 및 스크립트
+                콘텐츠의 저작권은 BTN라디오 및 아티스트에게 있으며, 본 사이트는 광고 수익을 창출하지 않습니다.</p>
+            <p class="footer-disclaimer">웹사이트 관련 오류 및 모든 문의 사항은 공식 방송국이 아닌 <a
+                    href="https://youtu.be/IY0xnDU5NuY?si=ANhZGPFktCNjiRtb" class="footer-link" target="_blank"
+                    rel="noopener noreferrer">제작자(유튜브 한입옥수수 채널)</a>에게 보내주시기 바랍니다.</p>
         </div>
     </footer>
 
     <!-- Custom Script -->
     <script src="main.js"></script>
 </body>
+
 </html>
