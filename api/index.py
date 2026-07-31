@@ -18,6 +18,19 @@ from api.youtube_mapping import YOUTUBE_MAP  # noqa: E402
 
 app = FastAPI(title="오늘따라 신승태 라디오 아카이브 API")
 
+class VercelPathMiddleware:
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http":
+            path = scope.get("path", "")
+            if path.startswith("/api/index.py"):
+                scope["path"] = path.replace("/api/index.py", "/api", 1)
+        await self.app(scope, receive, send)
+
+app.add_middleware(VercelPathMiddleware)
+
 # 교차 출처 리소스 공유(CORS) 설정
 app.add_middleware(
     CORSMiddleware,
