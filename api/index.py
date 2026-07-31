@@ -104,6 +104,20 @@ async def search_episodes(
                                 next_text = timeline[idx + 1].get("text", "") if idx < len(timeline) - 1 else ""
                                 combined_text = f"{prev_text} {time_item.get('text', '')} {next_text}".strip()
                                 
+                                # 예외 규칙: 128회 4311초 봉피양 대목의 경우 특정 어구 기준으로 앞뒤를 적절히 잘라냄
+                                if ep_num == 128 and abs(time_sec - 4311) <= 5 and highlight_word == "봉피양":
+                                    # 앞부분 사담 절단 후 말줄임표 붙임
+                                    start_phrase = "평양냉면 먹을 거면은"
+                                    idx_start = combined_text.find(start_phrase)
+                                    if idx_start != -1:
+                                        combined_text = "..." + combined_text[idx_start:]
+                                    
+                                    # 뒷부분 절단 후 말줄임표 붙임
+                                    cut_phrase = "그 완전 평양 냉면을 좋아하는 사람들 사이에서는"
+                                    idx_phrase = combined_text.find(cut_phrase)
+                                    if idx_phrase != -1:
+                                        combined_text = combined_text[:idx_phrase + len(cut_phrase)] + "..."
+                                
                                 search_results.append({
                                     "episode": ep_num,
                                     "video_id": video_id,
