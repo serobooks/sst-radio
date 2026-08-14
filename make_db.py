@@ -28,6 +28,14 @@ if os.path.exists(corrections_path):
 else:
     MANUAL_CORRECTIONS = {}
 
+# embargoes.json 로드
+embargoes_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "embargoes.json")
+if os.path.exists(embargoes_path):
+    with open(embargoes_path, "r", encoding="utf-8") as f:
+        EMBARGOES = json.load(f)
+else:
+    EMBARGOES = []
+
 @functools.lru_cache(maxsize=10240)
 def disassemble_korean(text):
     """한글 음절을 초성, 중성, 종성 자소로 분해합니다."""
@@ -157,6 +165,7 @@ def auto_detect_keywords(text):
     return list(detected)
 
 def parse_single_file(file_path, file_name):
+    episode_num = "".join(filter(str.isdigit, file_name))
     with open(file_path, 'r', encoding='utf-8') as f:
         full_content = f.read()
         
@@ -180,13 +189,28 @@ def parse_single_file(file_path, file_name):
     
     for i in range(1, len(timeline_blocks), 2):
         time_str = timeline_blocks[i].strip()
+        current_sec = time_to_seconds(time_str)
         text_content = clean_text_smart(timeline_blocks[i+1])
         
+        # 엠바고 조건 확인
+        is_embargoed = False
+        for rule in EMBARGOES:
+            if rule.get("active") and rule.get("episode") == int(episode_num):
+                start_sec = time_to_seconds(rule["start_time"])
+                end_sec = time_to_seconds(rule["end_time"])
+                if start_sec <= current_sec <= end_sec:
+                    is_embargoed = True
+                    break
+        
+        if is_embargoed:
+            text_content = "[추후 공개 예정 구간입니다]"
+            
         if text_content:
-            timeline_list.append({"time": time_to_seconds(time_str), "text": text_content})
-            all_episode_text += " " + text_content
+            timeline_list.append({"time": current_sec, "text": text_content})
+            # 엠바고 구간은 키워드 매칭 대상에서도 제외
+            if not is_embargoed:
+                all_episode_text += " " + text_content
 
-    episode_num = "".join(filter(str.isdigit, file_name))
     v_id = f"YOUTUBE_ID_{episode_num}"
 
     return {
