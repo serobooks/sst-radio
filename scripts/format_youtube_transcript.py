@@ -98,6 +98,13 @@ def merge_transcripts(parsed_lines, min_seconds=20, min_chars=80):
         
     return merged
 
+def is_ui_noise(line):
+    """유튜브 스크립트 복사 시 딸려오는 UI 요소(예: '동영상 시간 동기화') 여부를 판별합니다."""
+    cleaned = line.strip().replace(" ", "")
+    if cleaned in ("동영상시간동기화", "Toggletimestamps"):
+        return True
+    return False
+
 def process_file(file_path, min_seconds=20, min_chars=80):
     """지정된 파일을 읽어 포맷 정제 및 병합을 수행한 뒤 덮어씁니다."""
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -123,6 +130,8 @@ def process_file(file_path, min_seconds=20, min_chars=80):
     for l in lines[script_start_idx:]:
         clean_l = l.strip()
         if not clean_l:
+            continue
+        if is_ui_noise(clean_l):
             continue
         # 타임코드로 시작하는 행만 정제 대상
         if re.match(r'^\d{1,2}:\d{2}', clean_l):

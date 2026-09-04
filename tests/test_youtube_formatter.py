@@ -4,7 +4,8 @@ from scripts.format_youtube_transcript import (
     parse_time_to_seconds,
     parse_korean_time_to_seconds,
     clean_korean_timecode,
-    merge_transcripts
+    merge_transcripts,
+    process_file
 )
 
 def test_parse_time_to_seconds():
@@ -57,3 +58,22 @@ def test_merge_transcripts():
     assert len(merged) == 2
     assert merged[0] == "(00:00) 동참해 주세요. 안녕하세요. 가수 오유진입니다. 말을 하다 보면 상처가 될까 조심스러질 때가 있습니다."
     assert merged[1] == "(00:45) 그래서 말을 안 하죠."
+
+def test_process_file_ignores_ui_text(tmp_path):
+    # 유튜브 UI 텍스트('동영상 시간 동기화' 등)가 결과에 포함되지 않는지 테스트
+    test_file = tmp_path / "test_script.txt"
+    content = """[LIVE] 제목입니다 2026.09.03(140회)
+
+0:000초첫 번째 대사입니다.
+0:2525초두 번째 대사입니다.
+동영상 시간 동기화
+"""
+    test_file.write_text(content, encoding="utf-8")
+    
+    process_file(str(test_file), min_seconds=20, min_chars=10)
+    
+    result = test_file.read_text(encoding="utf-8")
+    assert "동영상 시간 동기화" not in result
+    assert "Transcripts:" in result
+    assert "첫 번째 대사입니다." in result
+    assert "두 번째 대사입니다." in result
