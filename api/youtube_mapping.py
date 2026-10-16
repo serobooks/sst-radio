@@ -11,7 +11,7 @@
 
 # 1단계: 가상의 기본 유튜브 ID 생성 (임시 개발용)
 YOUTUBE_MAP = {
-    i: f"YOUTUBE_ID_OF_EPISODE_{i:03d}" for i in range(1, 143)
+    i: f"YOUTUBE_ID_OF_EPISODE_{i:03d}" for i in range(1, 147)
 }
 
 # 2단계: 실제 유튜브 동영상 ID 목록을 기입하는 틀
