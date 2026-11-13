@@ -149,7 +149,9 @@ YOUTUBE_MAP.update({
     139: "IMZv0JPjgcw",
     140: "qCP-nKZwL7o",
     141: "sXSnJxp61fQ",
-    142: "I7wUM5wjMR8"
+    142: "I7wUM5wjMR8",
+    146: "YYkI3ZS6egs",
+    150: "YWbo3bS27JA"
 })
 
 # 3단계: 빈 문자열("")로 남아있는 항목은 시스템 충돌 방지를 위해 기본 가상 임시 ID로 자동 롤백
